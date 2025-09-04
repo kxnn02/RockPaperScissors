@@ -27,13 +27,7 @@ function getHumanChoice() {
 }
 
 
-// Logic to play the entire game
-// Create a function called playGame
-// Call the playRound function 5 times to play 5 round
 
-// Track the players score 
-// Create a variable for humanScore and computerScore
-// Initialize the value to 0
 
 
 
@@ -44,3 +38,55 @@ function getHumanChoice() {
 // Else computer wins 
 // Return the result 
 
+function playRound(humanChoice, computerChoice) {
+    // Tie
+    if (humanChoice === computerChoice) {
+        return "Tie!"
+    
+    //Rock beats Scissors
+    }else if (humanChoice === "ROCK" && computerChoice === "SCISSORS") {
+        return "Human wins!";
+
+    //Paper beats Rock
+    }else if (humanChoice === "PAPER" && computerChoice === "ROCK") {
+        return "Human wins!"
+
+    //Scissors beats Paper
+    }else if (humanChoice === "SCISSORS" && computerChoice === "PAPER") {
+        return "Human wins!"
+    }else {
+        return "Computer wins!"
+    } 
+}
+
+// Logic to play the entire game
+// Create a function called playGame
+// Call the playRound function 5 times to play 5 round
+
+function playGame(roundNum) {
+    // Track the players score 
+    // Create a variable for humanScore and computerScore
+    // Initialize the value to 0
+
+    let humanScore = 0;
+    let computerScore = 0;
+    
+    for (let i = 1; i <= roundNum; i++) {
+        let humanChoice = getHumanChoice();
+        let computerChoice = getComputerChoice();
+        let result = playRound(humanChoice, computerChoice)
+
+        console.log(`Round ${i}: You choose ${humanChoice}, computer choose ${computerChoice}`)
+        console.log(`Result: ${result}`)
+
+        if (result === "Human wins!") {
+            humanScore += 1;
+        }else if (result === "Computer wins!"){
+            computerScore += 1;
+        }
+    }
+
+    console.log(`Final score: Your score is ${humanScore}, computer score is ${computerScore}`);
+}
+
+playGame(5);
