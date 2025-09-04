@@ -87,6 +87,14 @@ function playGame(roundNum) {
     }
 
     console.log(`Final score: Your score is ${humanScore}, computer score is ${computerScore}`);
+    if (humanScore > computerScore) {
+        console.log("You won!")
+    }else if (humanScore < computerScore) {
+        console.log("You lost!")
+    }else {
+        console.log("Its a tie!")
+    }
+    
 }
 
 playGame(5);
