@@ -68,7 +68,9 @@ function playRound(humanChoice) {
         computerScore++; 
     }
 
-    results.textContent = `${roundMessage} Score: Player ${humanScore}, Computer ${computerScore}`;
+    document.querySelector(".playerScore").textContent = `Player: ${humanScore}`;
+    document.querySelector(".computerScore").textContent = `Computer: ${computerScore}`;
+    results.textContent = `${roundMessage}`;
 
     if (humanScore === 5) {
        results.textContent = "Congratulations! You won the game!"; 
