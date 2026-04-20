@@ -1,9 +1,30 @@
-// Create a function called getComputerChoice
-// Generate a random number between 0 and 2 
-// Assign it to a variable called computerChoice
-// If computerChoice === 0 return "Rock" 
-// Else if computerChoice === 1 return "Paper"
-// Else if computerChoice === 2 return "Scissors"  
+// 1. INITIALIZE GLOBAL VARIABLES
+// Create a variable for humanScore and set it to 0
+// Create a variable for computerScore and set it to 0
+
+let humanScore = 0;
+let computerScore = 0;
+
+// 2. SELECT DOM ELEMENTS
+// Select the Rock button using querySelector and store it in a variable
+// Select the Paper button using querySelector and store it in a variable
+// Select the Scissors button using querySelector and store it in a variable
+// Select the results div using querySelector and store it in a variable
+
+let rockButton = document.querySelector(".rock");
+let paperButton = document.querySelector(".paper");
+let scissorsButton = document.querySelector(".scissors");
+let results = document.querySelector(".results"); 
+
+// Add event listeners to the buttons to call the playRound function with the appropriate choice when clicked
+rockButton.addEventListener("click", () => playRound("ROCK"));
+
+paperButton.addEventListener("click", () => playRound("PAPER"));
+
+scissorsButton.addEventListener("click", () => playRound("SCISSORS")); 
+
+
+//3. COMPUTER CHOICE LOGIC
 
 function getComputerChoice() {
     let computerChoice = Math.floor(Math.random() * 3);
@@ -15,86 +36,56 @@ function getComputerChoice() {
 }
 
 
-// Create a function called getHumanChoice
-// Ask the user if ("Rock", "Paper", "Scissors") and assign it to a variable called humanChoice
-// Make the humanChoice case insensitive 
-// return the result
+// 4. PLAY ROUND LOGIC
 
-function getHumanChoice() {
-    let humanChoice = prompt("Choose: Rock, Paper, or Scissors?");
-    return humanChoice.toUpperCase();
+function playRound(humanChoice) {
+    if (humanScore >= 5 || computerScore >= 5) {
+        return;
+    }
 
-}
-
-
-
-
-
-
-// Logic to play single round
-// Create a function called playRound with two parameters (humanChoice, computerChoice)
-// If humanChoice === computerChoice then its a tie 
-// Else if humanChoice beats computerChoice then human wins
-// Else computer wins 
-// Return the result 
-
-function playRound(humanChoice, computerChoice) {
-    // Tie
+    let roundMessage;
+    let computerChoice = getComputerChoice();
+        // Tie
     if (humanChoice === computerChoice) {
-        return "Tie!"
+        roundMessage = "It's a tie!";
     
     //Rock beats Scissors
     }else if (humanChoice === "ROCK" && computerChoice === "SCISSORS") {
-        return "Human wins!";
+        roundMessage =  `Human wins!, ${humanChoice} beats ${computerChoice}`;
+        humanScore++;
 
     //Paper beats Rock
     }else if (humanChoice === "PAPER" && computerChoice === "ROCK") {
-        return "Human wins!"
+        roundMessage = `Human wins!, ${humanChoice} beats ${computerChoice}`;
+        humanScore++;
 
     //Scissors beats Paper
     }else if (humanChoice === "SCISSORS" && computerChoice === "PAPER") {
-        return "Human wins!"
+        roundMessage = `Human wins!, ${humanChoice} beats ${computerChoice}`;
+        humanScore++
     }else {
-        return "Computer wins!"
-    } 
-}
-
-// Logic to play the entire game
-// Create a function called playGame
-// Call the playRound function 5 times to play 5 round
-
-function playGame(roundNum) {
-    // Track the players score 
-    // Create a variable for humanScore and computerScore
-    // Initialize the value to 0
-
-    let humanScore = 0;
-    let computerScore = 0;
-    
-    for (let i = 1; i <= roundNum; i++) {
-        let humanChoice = getHumanChoice();
-        let computerChoice = getComputerChoice();
-        let result = playRound(humanChoice, computerChoice)
-
-        console.log(`Round ${i}: You choose ${humanChoice}, computer choose ${computerChoice}`)
-        console.log(`Result: ${result}`)
-
-        if (result === "Human wins!") {
-            humanScore += 1;
-        }else if (result === "Computer wins!"){
-            computerScore += 1;
-        }
+        roundMessage = `Computer wins!, ${computerChoice} beats ${humanChoice}`;
+        computerScore++; 
     }
 
-    console.log(`Final score: Your score is ${humanScore}, computer score is ${computerScore}`);
-    if (humanScore > computerScore) {
-        console.log("You won!")
-    }else if (humanScore < computerScore) {
-        console.log("You lost!")
-    }else {
-        console.log("Its a tie!")
+    results.textContent = `${roundMessage} Score: Player ${humanScore}, Computer ${computerScore}`;
+
+    if (humanScore === 5) {
+       results.textContent = "Congratulations! You won the game!"; 
+    }else if (computerScore === 5) {
+        results.textContent = "Sorry, you lost the game. Better luck next time!";
     }
-    
+
+   
+
 }
 
-playGame(5);
+
+
+
+
+
+
+
+
+
