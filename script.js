@@ -15,6 +15,7 @@ let rockButton = document.querySelector(".rock");
 let paperButton = document.querySelector(".paper");
 let scissorsButton = document.querySelector(".scissors");
 let results = document.querySelector(".results"); 
+let resetButton = document.querySelector(".reset");
 
 // Add event listeners to the buttons to call the playRound function with the appropriate choice when clicked
 rockButton.addEventListener("click", () => playRound("ROCK"));
@@ -22,6 +23,14 @@ rockButton.addEventListener("click", () => playRound("ROCK"));
 paperButton.addEventListener("click", () => playRound("PAPER"));
 
 scissorsButton.addEventListener("click", () => playRound("SCISSORS")); 
+
+resetButton.addEventListener("click", () => {
+    humanScore = 0;
+    computerScore = 0;
+    document.querySelector(".playerScore").textContent = `Player: ${humanScore}`;
+    document.querySelector(".computerScore").textContent = `Computer: ${computerScore}`;
+    results.textContent = "Game reset. Let's play again!";
+})
 
 
 //3. COMPUTER CHOICE LOGIC
